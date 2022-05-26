@@ -1,0 +1,223 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Imanage",
+        "description": "API for sj-dmobility.imanage.work",
+        "version": "0.0.0"
+    },
+    "host": "sj-dmobility.imanage.work",
+    "schemes": ["https"],
+    "paths": {
+        "/work/api": {
+            "get": {
+                "tags": ["Work"],
+                "description": "Get discovery",
+                "operationId": "get_discovery",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GetDiscovery"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "data": {
+                                    "auth_status": "authenticated",
+                                    "user": {
+                                        "customer_id": 1,
+                                        "id": "TESTUSER",
+                                        "name": "TESTUSER",
+                                        "email": "TESTUSER@STEPTOE-JOHNSON.COM"
+                                    },
+                                    "dms_version": "10.4.2.305",
+                                    "work": {
+                                        "preferred_library": "SJDEV",
+                                        "libraries": [{
+                                                "alias": "SJDEV",
+                                                "type": "worksite",
+                                                "region": "near",
+                                                "is_hidden": false
+                                            }
+                                        ]
+                                    },
+                                    "region": "near",
+                                    "capabilities": ["oauth"],
+                                    "versions": [{
+                                            "name": "v1",
+                                            "url": "https://sj-dmobility.imanage.work/work/api/v1",
+                                            "version": "1.0.0"
+                                        }, {
+                                            "name": "v2",
+                                            "url": "https://sj-dmobility.imanage.work/work/api/v2",
+                                            "version": "2.1.644"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                {
+                    "oauth2": [
+                        "https://sj-dmobility.imanage.work/work/api"
+                    ]
+                }
+            ]
+            }
+        }
+    },
+    "definitions": {
+        "GetDiscovery": {
+            "description": "Model for GetDiscovery",
+            "required": ["data"],
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/Data",
+                    "x-example": "{  \"auth_status\": \"authenticated\",  \"user\": {    \"customer_id\": 1,    \"id\": \"TESTUSER\",    \"name\": \"TESTUSER\",    \"email\": \"TESTUSER@STEPTOE-JOHNSON.COM\"  },  \"dms_version\": \"10.4.2.305\",  \"work\": {    \"preferred_library\": \"SJDEV\",    \"libraries\": [      {        \"alias\": \"SJDEV\",        \"type\": \"worksite\",        \"region\": \"near\",        \"is_hidden\": false      }    ]  },  \"region\": \"near\",  \"capabilities\": [    \"oauth\"  ],  \"versions\": [    {      \"name\": \"v1\",      \"url\": \"https://sj-dmobility.imanage.work/work/api/v1\",      \"version\": \"1.0.0\"    },    {      \"name\": \"v2\",      \"url\": \"https://sj-dmobility.imanage.work/work/api/v2\",      \"version\": \"2.1.644\"    }  ]}"
+                }
+            }
+        },
+        "Versions": {
+            "description": "Model for Versions",
+            "required": ["name"],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "x-example": "v1"
+                },
+                "url": {
+                    "type": "string",
+                    "x-example": "https://sj-dmobility.imanage.work/work/api/v1"
+                },
+                "version": {
+                    "type": "string",
+                    "x-example": "1.0.0"
+                }
+            }
+        },
+        "Data": {
+            "description": "Model for Data",
+            "required": ["auth_status"],
+            "properties": {
+                "auth_status": {
+                    "type": "string",
+                    "x-example": "authenticated"
+                },
+                "capabilities": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "x-example": "[\"oauth\"]"
+                },
+                "dms_version": {
+                    "type": "string",
+                    "x-example": "10.4.2.305"
+                },
+                "region": {
+                    "type": "string",
+                    "x-example": "near"
+                },
+                "user": {
+                    "$ref": "#/definitions/User",
+                    "x-example": "{  \"customer_id\": 1,  \"id\": \"TESTUSER\",  \"name\": \"TESTUSER\",  \"email\": \"TESTUSER@STEPTOE-JOHNSON.COM\"}"
+                },
+                "versions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Versions"
+                    },
+                    "x-example": "[  {    \"name\": \"v1\",    \"url\": \"https://sj-dmobility.imanage.work/work/api/v1\",    \"version\": \"1.0.0\"  },  {    \"name\": \"v2\",    \"url\": \"https://sj-dmobility.imanage.work/work/api/v2\",    \"version\": \"2.1.644\"  }]"
+                },
+                "work": {
+                    "$ref": "#/definitions/Work",
+                    "x-example": "{  \"preferred_library\": \"SJDEV\",  \"libraries\": [    {      \"alias\": \"SJDEV\",      \"type\": \"worksite\",      \"region\": \"near\",      \"is_hidden\": false    }  ]}"
+                }
+            }
+        },
+        "Work": {
+            "description": "Model for Work",
+            "required": ["libraries"],
+            "properties": {
+                "libraries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Libraries"
+                    },
+                    "x-example": "[  {    \"alias\": \"SJDEV\",    \"type\": \"worksite\",    \"region\": \"near\",    \"is_hidden\": false  }]"
+                },
+                "preferred_library": {
+                    "type": "string",
+                    "x-example": "SJDEV"
+                }
+            }
+        },
+        "Libraries": {
+            "description": "Model for Libraries",
+            "required": ["alias"],
+            "properties": {
+                "alias": {
+                    "type": "string",
+                    "x-example": "SJDEV"
+                },
+                "is_hidden": {
+                    "type": "boolean",
+                    "x-example": "false"
+                },
+                "region": {
+                    "type": "string",
+                    "x-example": "near"
+                },
+                "type": {
+                    "type": "string",
+                    "x-example": "worksite"
+                }
+            }
+        },
+        "User": {
+            "description": "Model for User",
+            "required": ["customer_id"],
+            "properties": {
+                "customer_id": {
+                    "type": "integer",
+                    "format": "int32",
+                    "x-example": "1"
+                },
+                "email": {
+                    "type": "string",
+                    "x-example": "TESTUSER@STEPTOE-JOHNSON.COM"
+                },
+                "id": {
+                    "type": "string",
+                    "x-example": "TESTUSER"
+                },
+                "name": {
+                    "type": "string",
+                    "x-example": "TESTUSER"
+                }
+            }
+        }
+    },
+      "securityDefinitions": {
+    "oauth2": {
+        "type": "oauth2",
+        "flow": "password",
+        "tokenUrl": "https://sj-dmobility.imanage.work/auth/oauth2/token",
+        "scopes": {}
+    }
+},
+    "security": [
+                {
+                    "oauth2": [
+                        "https://sj-dmobility.imanage.work/auth/oauth2/token"
+                    ]
+                }
+            ],
+    "tags": [{
+            "name": "Work",
+            "description": "Operations about Work"
+        }
+    ]
+}
